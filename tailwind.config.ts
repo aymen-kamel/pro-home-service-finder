@@ -63,14 +63,16 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Add custom colors for ProHome
+				// Update ProHome colors to a darker urban palette
 				prohome: {
 					blue: '#3B82F6',
 					green: '#10B981',
 					orange: '#F97316',
-					"light-blue": '#EBF4FF',
-					"light-green": '#ECFDF5',
-					"light-orange": '#FFF7ED'
+					"light-blue": '#1A1F2C',
+					"light-green": '#222222',
+					"light-orange": '#403E43',
+					"dark": '#121212',
+					"dark-accent": '#2A2A2A'
 				}
 			},
 			borderRadius: {
