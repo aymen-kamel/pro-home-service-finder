@@ -1,7 +1,7 @@
 
 import React from 'react';
 import ServiceCard from './ServiceCard';
-import { Wrench, Paint, Shower, Lightbulb, Ruler, Leaf } from 'lucide-react';
+import { Wrench, Paintbrush, Droplets, Lightbulb, Ruler, Leaf } from 'lucide-react';
 
 const FeaturedServices: React.FC = () => {
   const services = [
@@ -13,13 +13,13 @@ const FeaturedServices: React.FC = () => {
     },
     {
       title: 'Painting',
-      icon: <Paint className="h-10 w-10 text-prohome-blue" />,
+      icon: <Paintbrush className="h-10 w-10 text-prohome-blue" />,
       description: 'Professional painters for interior and exterior home painting projects.',
       color: 'bg-prohome-light-blue'
     },
     {
       title: 'Bathroom Remodel',
-      icon: <Shower className="h-10 w-10 text-prohome-green" />,
+      icon: <Droplets className="h-10 w-10 text-prohome-green" />,
       description: 'Transform your bathroom with expert remodelers and designers.',
       color: 'bg-prohome-light-green'
     },
