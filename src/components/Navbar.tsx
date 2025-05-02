@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center">
             <a href="/" className="text-2xl font-bold text-prohome-blue">
-              ProHome
+              Aweni
             </a>
           </div>
 

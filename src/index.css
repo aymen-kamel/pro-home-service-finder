@@ -45,7 +45,7 @@
   }
 
   body {
-    @apply bg-prohome-dark text-foreground font-sans;
+    @apply bg-white text-foreground font-sans;
   }
 
   .hero-pattern {
@@ -61,12 +61,26 @@
     @apply flex items-center space-x-1;
   }
   
-  /* New urban styles */
+  /* Family-friendly urban styles */
   .glass-card {
     @apply bg-black/30 backdrop-blur-lg border border-white/10 rounded-lg;
   }
   
   .urban-gradient {
     @apply bg-gradient-to-br from-prohome-dark to-prohome-dark-accent;
+  }
+
+  /* New family-friendly animations */
+  .family-fade-in {
+    @apply animate-[fadeIn_0.5s_ease-out_forwards];
+    opacity: 0;
+  }
+  
+  .family-bounce {
+    @apply animate-[bounce_1s_ease-in-out_infinite];
+  }
+  
+  .family-card {
+    @apply border-2 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300;
   }
 }

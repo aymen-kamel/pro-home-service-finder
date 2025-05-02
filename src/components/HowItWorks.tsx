@@ -6,27 +6,31 @@ const HowItWorks: React.FC = () => {
   const steps = [
     {
       icon: <Search className="h-10 w-10 text-white" />,
-      title: 'Find Services',
-      description: 'Search for the service you need and browse local professionals.',
-      bgColor: 'bg-prohome-blue'
+      title: 'Find Family Services',
+      description: 'Search for the service your family needs and browse local, trusted professionals.',
+      bgColor: 'bg-prohome-blue',
+      image: 'https://images.unsplash.com/photo-1639518904146-30bca2ff2591?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80'
     },
     {
       icon: <ClipboardCheck className="h-10 w-10 text-white" />,
-      title: 'Compare Quotes',
-      description: 'Review prices, ratings, and detailed profiles to choose the right pro.',
-      bgColor: 'bg-prohome-green'
+      title: 'Compare Safe Options',
+      description: 'Review prices, ratings, and detailed profiles of family-approved professionals.',
+      bgColor: 'bg-prohome-green',
+      image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80'
     },
     {
       icon: <Calendar className="h-10 w-10 text-white" />,
-      title: 'Book Your Service',
-      description: 'Schedule appointments easily and get updates on your booking.',
-      bgColor: 'bg-prohome-orange'
+      title: 'Book Around Your Schedule',
+      description: 'Schedule appointments that work with your busy family calendar.',
+      bgColor: 'bg-prohome-orange',
+      image: 'https://images.unsplash.com/photo-1560264280-88b68371db39?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80'
     },
     {
       icon: <Star className="h-10 w-10 text-white" />,
-      title: 'Leave a Review',
-      description: 'Share your experience to help others find quality service.',
-      bgColor: 'bg-prohome-blue'
+      title: 'Share Your Experience',
+      description: 'Help other families find quality service by sharing your feedback.',
+      bgColor: 'bg-prohome-blue',
+      image: 'https://images.unsplash.com/photo-1516146544193-b54a65682f16?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80'
     }
   ];
 
@@ -34,15 +38,20 @@ const HowItWorks: React.FC = () => {
     <section id="how-it-works" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">How It Works</h2>
+          <h2 className="text-3xl font-bold mb-4">How Aweni Works for Families</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Finding and hiring qualified professionals has never been easier. Follow these simple steps to get started.
+            Finding and hiring qualified family-friendly professionals has never been easier. Follow these simple steps.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
             <div key={index} className="flex flex-col items-center text-center">
+              {step.image && (
+                <div className="w-full h-48 mb-4 overflow-hidden rounded-lg">
+                  <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
+                </div>
+              )}
               <div className={`rounded-full p-5 mb-6 ${step.bgColor}`}>
                 {step.icon}
               </div>

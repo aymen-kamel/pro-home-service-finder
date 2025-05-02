@@ -63,7 +63,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Update ProHome colors to a darker urban palette
+				// Update colors to a family-friendly but still urban palette
 				prohome: {
 					blue: '#3B82F6',
 					green: '#10B981',
@@ -72,7 +72,13 @@ export default {
 					"light-green": '#222222',
 					"light-orange": '#403E43',
 					"dark": '#121212',
-					"dark-accent": '#2A2A2A'
+					"dark-accent": '#2A2A2A',
+					// Family-friendly additions
+					"family-blue": '#4F86F7',
+					"family-green": '#77DD77',
+					"family-orange": '#FFB347',
+					"family-purple": '#B39DDB',
+					"family-pink": '#F49AC2'
 				}
 			},
 			borderRadius: {
@@ -106,12 +112,21 @@ export default {
 						opacity: '1',
 						transform: 'translateY(0)'
 					}
+				},
+				'bounce': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-5px)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.3s ease-out'
+				'fade-in': 'fade-in 0.3s ease-out',
+				'bounce': 'bounce 1s infinite'
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif']

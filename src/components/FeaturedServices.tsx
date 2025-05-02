@@ -6,40 +6,46 @@ import { Wrench, Paintbrush, Droplets, Lightbulb, Ruler, Leaf } from 'lucide-rea
 const FeaturedServices: React.FC = () => {
   const services = [
     {
-      title: 'Plumbing',
+      title: 'Family Plumbing',
       icon: <Wrench className="h-10 w-10 text-prohome-blue" />,
-      description: 'From leaks to installations, our verified plumbers can handle any job.',
-      color: 'bg-prohome-light-blue'
+      description: 'Safe and reliable plumbing services for your family home, from leaks to installations.',
+      color: 'bg-prohome-light-blue',
+      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
     },
     {
-      title: 'Painting',
+      title: 'Home Painting',
       icon: <Paintbrush className="h-10 w-10 text-prohome-blue" />,
-      description: 'Professional painters for interior and exterior home painting projects.',
-      color: 'bg-prohome-light-blue'
+      description: 'Transform your family spaces with our professional painting services.',
+      color: 'bg-prohome-light-blue',
+      image: "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
     },
     {
       title: 'Bathroom Remodel',
       icon: <Droplets className="h-10 w-10 text-prohome-green" />,
-      description: 'Transform your bathroom with expert remodelers and designers.',
-      color: 'bg-prohome-light-green'
+      description: 'Create a safe, beautiful bathroom space for your entire family.',
+      color: 'bg-prohome-light-green',
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
     },
     {
-      title: 'Electrical',
+      title: 'Child-Safe Electrical',
       icon: <Lightbulb className="h-10 w-10 text-prohome-green" />,
-      description: 'Licensed electricians for repairs, installations, and upgrades.',
-      color: 'bg-prohome-light-green'
+      description: 'Licensed electricians focused on safety for your family and home.',
+      color: 'bg-prohome-light-green',
+      image: "https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
     },
     {
-      title: 'Home Remodeling',
+      title: 'Family Room Remodeling',
       icon: <Ruler className="h-10 w-10 text-prohome-orange" />,
-      description: 'Complete home renovations and custom remodeling projects.',
-      color: 'bg-prohome-light-orange'
+      description: 'Create perfect spaces for family gatherings and everyday living.',
+      color: 'bg-prohome-light-orange',
+      image: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
     },
     {
-      title: 'Lawn & Garden',
+      title: 'Kid-Friendly Yards',
       icon: <Leaf className="h-10 w-10 text-prohome-orange" />,
-      description: 'Landscaping, lawn care, and garden maintenance services.',
-      color: 'bg-prohome-light-orange'
+      description: 'Safe, beautiful outdoor spaces where children can play and families can gather.',
+      color: 'bg-prohome-light-orange',
+      image: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
     }
   ];
 
@@ -47,9 +53,9 @@ const FeaturedServices: React.FC = () => {
     <section id="services" className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Popular Home Services</h2>
+          <h2 className="text-3xl font-bold mb-4">Family-Friendly Home Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover top-rated professionals for all your home service needs. All service providers are verified and reviewed.
+            Discover top-rated professionals for all your family's home service needs. All service providers are verified, background-checked, and family-approved.
           </p>
         </div>
 
@@ -61,13 +67,14 @@ const FeaturedServices: React.FC = () => {
               icon={service.icon}
               description={service.description}
               color={service.color}
+              image={service.image}
             />
           ))}
         </div>
 
         <div className="text-center mt-12">
           <a href="#all-services" className="text-prohome-blue hover:text-prohome-blue/80 font-medium">
-            View all services →
+            View all family services →
           </a>
         </div>
       </div>
