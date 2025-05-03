@@ -42,7 +42,9 @@ const Navbar: React.FC = () => {
             <Button variant="ghost" size="sm">
               <User className="h-5 w-5 mr-2" /> Sign In
             </Button>
-            <Button>Join Now</Button>
+            <Button asChild>
+              <Link to="/signup">Join Now</Link>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -76,7 +78,9 @@ const Navbar: React.FC = () => {
                 <Button variant="outline" size="sm" className="justify-start">
                   <User className="h-5 w-5 mr-2" /> Sign In
                 </Button>
-                <Button className="justify-start">Join Now</Button>
+                <Button className="justify-start" asChild>
+                  <Link to="/signup">Join Now</Link>
+                </Button>
               </div>
             </div>
           </div>
