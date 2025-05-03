@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -31,6 +32,7 @@ const formSchema = z.object({
 
 const SignUp = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,7 +49,18 @@ const SignUp = () => {
       title: "Account creation initiated",
       description: "We've started creating your account. Please check your email.",
     });
+    
+    // Navigate to home page after successful signup
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   }
+
+  // Function to handle "Sign In" link click
+  const handleSignInClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    navigate('/'); // Navigate to home for now since we don't have a signin page yet
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -111,7 +124,7 @@ const SignUp = () => {
             
             <div className="mt-6 text-center text-sm">
               <p className="text-gray-600">
-                Already have an account? <a href="/signin" className="text-prohome-blue font-medium">Sign In</a>
+                Already have an account? <a href="#" onClick={handleSignInClick} className="text-prohome-blue font-medium">Sign In</a>
               </p>
             </div>
           </div>
