@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { User, Menu, X } from "lucide-react";
 
@@ -12,25 +13,28 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="/" className="text-2xl font-bold text-prohome-blue">
+            <Link to="/" className="text-2xl font-bold text-prohome-blue">
               Aweni
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-10">
-            <a href="/" className="font-medium text-gray-600 hover:text-prohome-blue transition-colors">
+            <Link to="/" className="font-medium text-gray-600 hover:text-prohome-blue transition-colors">
               Home
-            </a>
-            <a href="#services" className="font-medium text-gray-600 hover:text-prohome-blue transition-colors">
+            </Link>
+            <Link to="/services" className="font-medium text-gray-600 hover:text-prohome-blue transition-colors">
               Services
-            </a>
-            <a href="#how-it-works" className="font-medium text-gray-600 hover:text-prohome-blue transition-colors">
+            </Link>
+            <Link to="/how-it-works" className="font-medium text-gray-600 hover:text-prohome-blue transition-colors">
               How It Works
-            </a>
-            <a href="#professionals" className="font-medium text-gray-600 hover:text-prohome-blue transition-colors">
+            </Link>
+            <Link to="/professionals" className="font-medium text-gray-600 hover:text-prohome-blue transition-colors">
               Find Pros
-            </a>
+            </Link>
+            <Link to="/contact" className="font-medium text-gray-600 hover:text-prohome-blue transition-colors">
+              Contact
+            </Link>
           </div>
 
           {/* Auth Buttons */}
@@ -53,18 +57,21 @@ const Navbar: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 animate-fade-in">
             <div className="flex flex-col space-y-3">
-              <a href="/" className="font-medium text-gray-600 hover:text-prohome-blue py-2 px-2">
+              <Link to="/" className="font-medium text-gray-600 hover:text-prohome-blue py-2 px-2">
                 Home
-              </a>
-              <a href="#services" className="font-medium text-gray-600 hover:text-prohome-blue py-2 px-2">
+              </Link>
+              <Link to="/services" className="font-medium text-gray-600 hover:text-prohome-blue py-2 px-2">
                 Services
-              </a>
-              <a href="#how-it-works" className="font-medium text-gray-600 hover:text-prohome-blue py-2 px-2">
+              </Link>
+              <Link to="/how-it-works" className="font-medium text-gray-600 hover:text-prohome-blue py-2 px-2">
                 How It Works
-              </a>
-              <a href="#professionals" className="font-medium text-gray-600 hover:text-prohome-blue py-2 px-2">
+              </Link>
+              <Link to="/professionals" className="font-medium text-gray-600 hover:text-prohome-blue py-2 px-2">
                 Find Pros
-              </a>
+              </Link>
+              <Link to="/contact" className="font-medium text-gray-600 hover:text-prohome-blue py-2 px-2">
+                Contact
+              </Link>
               <div className="pt-4 flex flex-col space-y-3">
                 <Button variant="outline" size="sm" className="justify-start">
                   <User className="h-5 w-5 mr-2" /> Sign In

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import FeaturedServices from '@/components/FeaturedServices';
@@ -75,7 +76,9 @@ const Index = () => {
             </div>
             
             <div className="text-center mt-10">
-              <Button size="lg">View All Family-Friendly Pros</Button>
+              <Button size="lg" asChild>
+                <Link to="/professionals">View All Family-Friendly Pros</Link>
+              </Button>
             </div>
           </div>
         </section>
@@ -136,8 +139,8 @@ const Index = () => {
               Find trusted professionals who understand the needs of your family. Get started today!
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="bg-white text-prohome-blue hover:bg-gray-100">
-                Find a Family-Friendly Pro
+              <Button size="lg" className="bg-white text-prohome-blue hover:bg-gray-100" asChild>
+                <Link to="/professionals">Find a Family-Friendly Pro</Link>
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
                 Join as a Professional
