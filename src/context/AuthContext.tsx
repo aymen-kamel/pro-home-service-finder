@@ -1,18 +1,19 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
-import { Session, User } from '@supabase/supabase-js';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
+import { Session, User, AuthError } from '@supabase/supabase-js';
+import { toast } from 'sonner';
 
 type AuthContextType = {
   session: Session | null;
   user: User | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{
-    error: Error | null;
+    error: AuthError | null;
     data: Session | null;
   }>;
   signUp: (email: string, password: string, fullName: string) => Promise<{
-    error: Error | null;
+    error: AuthError | null;
     data: { user: User | null; session: Session | null } | null;
   }>;
   signOut: () => Promise<void>;
@@ -26,6 +27,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check if Supabase is configured before attempting to use it
+    if (!isSupabaseConfigured()) {
+      console.error("Supabase URL and/or Anon Key are not configured.");
+      toast({
+        title: "Configuration Error",
+        description: "Backend services are not properly configured.",
+        variant: "destructive",
+      });
+      setLoading(false);
+      return;
+    }
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -46,18 +59,45 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    return supabase.auth.signInWithPassword({ email, password });
+    try {
+      const result = await supabase.auth.signInWithPassword({ email, password });
+      return {
+        error: result.error,
+        data: result.data.session
+      };
+    } catch (error) {
+      console.error("Sign in error:", error);
+      return {
+        error: new AuthError("Failed to sign in"),
+        data: null
+      };
+    }
   };
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    const result = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { full_name: fullName }
-      }
-    });
-    return result;
+    try {
+      const result = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { full_name: fullName }
+        }
+      });
+      
+      return {
+        error: result.error,
+        data: result.data ? { 
+          user: result.data.user, 
+          session: result.data.session 
+        } : null
+      };
+    } catch (error) {
+      console.error("Sign up error:", error);
+      return {
+        error: new AuthError("Failed to sign up"),
+        data: null
+      };
+    }
   };
 
   const signOut = async () => {
