@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -17,7 +17,8 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/components/ui/use-toast';
-import { Link } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext';
+import { Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -31,6 +32,11 @@ const formSchema = z.object({
 const SignIn = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { signIn } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const from = location.state?.from?.pathname || '/';
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,17 +46,36 @@ const SignIn = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Sign in successful",
-      description: "Welcome back to Aweni!",
-    });
-    
-    // Navigate to home page after successful signin
-    setTimeout(() => {
-      navigate('/');
-    }, 1500);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    try {
+      const { error } = await signIn(values.email, values.password);
+      
+      if (error) {
+        toast({
+          title: "Sign in failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Sign in successful",
+          description: "Welcome back to Aweni!",
+        });
+        
+        // Navigate to previous page or home
+        navigate(from, { replace: true });
+      }
+    } catch (error) {
+      console.error('Sign in error:', error);
+      toast({
+        title: "Sign in failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -101,7 +126,16 @@ const SignIn = () => {
                   </Link>
                 </div>
                 
-                <Button type="submit" className="w-full">Sign In</Button>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> 
+                      Signing In...
+                    </>
+                  ) : (
+                    'Sign In'
+                  )}
+                </Button>
               </form>
             </Form>
             

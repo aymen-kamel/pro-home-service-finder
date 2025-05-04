@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -18,7 +18,8 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/components/ui/use-toast';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Loader2 } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 const formSchema = z.object({
   fullName: z.string().min(2, {
@@ -35,6 +36,8 @@ const formSchema = z.object({
 const SignUp = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { signUp } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,17 +48,42 @@ const SignUp = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Account creation initiated",
-      description: "We've started creating your account. Please check your email.",
-    });
-    
-    // Navigate to home page after successful signup
-    setTimeout(() => {
-      navigate('/');
-    }, 2000);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    try {
+      const { error } = await signUp(
+        values.email, 
+        values.password,
+        values.fullName
+      );
+      
+      if (error) {
+        toast({
+          title: "Sign up failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Account created successfully",
+          description: "Please check your email for verification instructions.",
+        });
+        
+        // Navigate to home page after successful signup
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+      }
+    } catch (error) {
+      console.error('Sign up error:', error);
+      toast({
+        title: "Sign up failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -128,7 +156,16 @@ const SignUp = () => {
                   </div>
                 </div>
                 
-                <Button type="submit" className="w-full">Create Account</Button>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> 
+                      Creating Account...
+                    </>
+                  ) : (
+                    'Create Account'
+                  )}
+                </Button>
               </form>
             </Form>
             

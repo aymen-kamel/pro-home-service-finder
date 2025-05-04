@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { User, Menu, X } from "lucide-react";
+import { useAuth } from '@/context/AuthContext';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuth();
 
   return (
     <nav className="bg-white sticky top-0 z-50 shadow-sm">
@@ -39,14 +41,24 @@ const Navbar: React.FC = () => {
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" asChild>
-              <Link to="/signin">
-                <User className="h-5 w-5 mr-2" /> Sign In
-              </Link>
-            </Button>
-            <Button asChild>
-              <Link to="/signup">Join Now</Link>
-            </Button>
+            {user ? (
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/profile">
+                  <User className="h-5 w-5 mr-2" /> My Profile
+                </Link>
+              </Button>
+            ) : (
+              <>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link to="/signin">
+                    <User className="h-5 w-5 mr-2" /> Sign In
+                  </Link>
+                </Button>
+                <Button asChild>
+                  <Link to="/signup">Join Now</Link>
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -77,14 +89,24 @@ const Navbar: React.FC = () => {
                 Contact
               </Link>
               <div className="pt-4 flex flex-col space-y-3">
-                <Button variant="outline" size="sm" className="justify-start" asChild>
-                  <Link to="/signin">
-                    <User className="h-5 w-5 mr-2" /> Sign In
-                  </Link>
-                </Button>
-                <Button className="justify-start" asChild>
-                  <Link to="/signup">Join Now</Link>
-                </Button>
+                {user ? (
+                  <Button variant="outline" size="sm" className="justify-start" asChild>
+                    <Link to="/profile">
+                      <User className="h-5 w-5 mr-2" /> My Profile
+                    </Link>
+                  </Button>
+                ) : (
+                  <>
+                    <Button variant="outline" size="sm" className="justify-start" asChild>
+                      <Link to="/signin">
+                        <User className="h-5 w-5 mr-2" /> Sign In
+                      </Link>
+                    </Button>
+                    <Button className="justify-start" asChild>
+                      <Link to="/signup">Join Now</Link>
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </div>
