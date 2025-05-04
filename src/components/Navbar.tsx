@@ -39,8 +39,10 @@ const Navbar: React.FC = () => {
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm">
-              <User className="h-5 w-5 mr-2" /> Sign In
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/signin">
+                <User className="h-5 w-5 mr-2" /> Sign In
+              </Link>
             </Button>
             <Button asChild>
               <Link to="/signup">Join Now</Link>
@@ -75,8 +77,10 @@ const Navbar: React.FC = () => {
                 Contact
               </Link>
               <div className="pt-4 flex flex-col space-y-3">
-                <Button variant="outline" size="sm" className="justify-start">
-                  <User className="h-5 w-5 mr-2" /> Sign In
+                <Button variant="outline" size="sm" className="justify-start" asChild>
+                  <Link to="/signin">
+                    <User className="h-5 w-5 mr-2" /> Sign In
+                  </Link>
                 </Button>
                 <Button className="justify-start" asChild>
                   <Link to="/signup">Join Now</Link>
