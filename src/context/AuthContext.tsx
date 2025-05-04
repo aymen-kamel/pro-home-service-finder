@@ -30,10 +30,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Check if Supabase is configured before attempting to use it
     if (!isSupabaseConfigured()) {
       console.error("Supabase URL and/or Anon Key are not configured.");
-      toast({
-        title: "Configuration Error",
+      toast.error("Configuration Error", {
         description: "Backend services are not properly configured.",
-        variant: "destructive",
       });
       setLoading(false);
       return;

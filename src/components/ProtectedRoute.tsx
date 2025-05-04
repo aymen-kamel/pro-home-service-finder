@@ -15,8 +15,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   useEffect(() => {
     if (!isSupabaseConfigured()) {
-      toast({
-        title: "Configuration Error",
+      toast.error("Configuration Error", {
         description: "Backend services are not available. Please set up your Supabase environment variables.",
       });
     }
